@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head (title='Admin - CovidTest')"></head>
+<body>
+<div th:replace="fragments :: navbar (isAdminPanel=true)"></div>
+
+<div class="container">
+  <section class="section">
+    <h1 class="title">Edit Product</h1>
+
+    <form th:object="${product}" th:action="@{/admin/products/edit/{id}(id = ${product.id})}" method="post">
+      <div class="field">
+        <label class="label" for="productName">Name</label>
+        <div class="control">
+          <input class="input" type="text" id="productName" th:field="*{name}" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="productValidity">Validity</label>
+        <div class="control">
+          <input class="input" type="text" id="productValidity" th:field="*{validityDuration}" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="productInstructions">Instructions</label>
+        <div class="control">
+          <input class="input" type="text" id="productInstructions" th:field="*{useInstructions}" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input class="button is-primary" type="submit" value="Save">
+        </div>
+      </div>
+    </form>
+  </section>
+</div>
+</body>
+</html>

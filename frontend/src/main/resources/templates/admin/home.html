@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head (title='Admin - CovidTest')"></head>
+<body>
+<div th:replace="fragments :: navbar (isAdminPanel=true)"></div>
+
+<div class="container">
+    <section class="section">
+        <h1 class="title">Admin Panel</h1>
+
+        <div class="buttons is-centered">
+            <a class="button" th:href="@{/admin/products}">Products</a>
+            <a class="button" th:href="@{/admin/users}">Users</a>
+        </div>
+    </section>
+</div>
+</body>
+</html>

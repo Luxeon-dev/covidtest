@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head (title='Account - CovidTest')"></head>
+<body>
+<div th:replace="fragments :: navbar"></div>
+
+<div class="container">
+  <section class="section">
+    <h1 class="title">My Account</h1>
+
+    <h2>My Orders</h2>
+
+    <table class="table is-striped is-hoverable is-fullwidth">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Items</th>
+        <th>Address</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="order: ${orders}">
+        <td th:text="${order.id}">ID</td>
+        <td>
+          <p th:each="item: ${order.orderEntries}"><span th:text="${item.product.name}"></span> <strong th:text="'x' + ${item.quantity}"></strong></p>
+        </td>
+        <td th:text="${order.deliveryAddress}">Address</td>
+        <td th:text="${order.delivered ? 'Delivered' : 'Pending'}">Status</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" lang="en">
+<head th:fragment="head (title)">
+    <title th:text="${title}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link rel="icon" th:href="@{/img/favicon.ico}" />
+</head>
+<body>
+<nav th:fragment="navbar" th:with="isAdminPanel=(${isAdminPanel} ?: false)" class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" th:href="@{/shop}">
+            <img th:src="@{/img/covidtest_logo.png}" alt="CovidTest Logo" width="112" height="28">
+        </a>
+    </div>
+
+    <div class="navbar-menu">
+        <div class="navbar-end" sec:authorize="isAuthenticated()">
+            <div class="navbar-item" th:if="${!isAdminPanel}">
+                <a class="has-text-primary" th:href="@{/shop/cart}">Cart</a>
+            </div>
+            <div class="navbar-item" sec:authorize="hasRole('admin')">
+                <a class="has-text-primary" th:href="@{/admin}">Admin Panel</a>
+            </div>
+            <div class="navbar-item" sec:authorize="hasRole('government')">
+                <a class="has-text-primary" th:href="@{/government}">Government Panel</a>
+            </div>
+            <div class="navbar-item" sec:authorize="hasRole('delivery_man')">
+                <a class="has-text-primary" th:href="@{/delivery}">Delivery Panel</a>
+            </div>
+            <div class="navbar-item">
+                <a class="has-text-primary" th:href="@{/account}" sec:authentication="name"></a>
+            </div>
+            <div class="navbar-item">
+                <form name="logoutForm" th:action="@{/logout}" method="post">
+                    <input class="button is-primary" type="submit" value="Sign Out" />
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>

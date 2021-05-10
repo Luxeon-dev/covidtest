@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head (title='Shop - CovidTest')"></head>
+<body>
+  <div th:replace="fragments :: navbar"></div>
+
+  <div class="container">
+    <section class="section">
+      <h1 class="title">Products</h1>
+
+      <div class="columns is-multiline">
+        <div class="column is-3" th:each="product: ${products}">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="http://tsr-industrie.fr/wp-content/uploads/2016/04/ef3-placeholder-image.jpg" alt=""/>
+              </figure>
+            </div>
+            <div class="card-content">
+              <p class="title" th:text="${product.name}">Product Name</p>
+            </div>
+            <footer class="card-footer">
+              <a class="card-footer-item" th:href="@{/shop/product/{id}(id = ${product.id})}">More</a>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

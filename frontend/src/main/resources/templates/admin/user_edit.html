@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head (title='Admin - CovidTest')"></head>
+<body>
+<div th:replace="fragments :: navbar (isAdminPanel=true)"></div>
+
+<div class="container">
+  <section class="section">
+    <h1 class="title">Edit User</h1>
+
+    <form th:object="${user}" th:action="@{/admin/users/edit/{id}(id = ${user.id})}" method="post">
+      <div class="field">
+        <label class="label">First Name</label>
+        <div class="control">
+          <input class="input" type="text" th:field="*{firstName}" required/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Last Name</label>
+        <div class="control">
+          <input class="input" type="text" th:field="*{lastName}" required/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Social Security Number</label>
+        <div class="control">
+          <input class="input" type="text" th:field="*{username}" required/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input" type="text" th:field="*{email}" required/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Password <span class="tag is-primary is-light">Optional</span></label>
+        <div class="control">
+          <input class="input" type="password" th:field="*{credentials[0].value}"/>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Roles <span class="tag is-primary is-light">Optional</span></label>
+        <div class="control">
+          <div class="select is-multiple">
+            <select multiple size="3" th:field="*{realmRoles}">
+              <option value="delivery_man">Delivery Man</option>
+              <option value="admin">Administrator</option>
+              <option value="government">Government</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <input class="button is-primary" type="submit" value="Save">
+        </div>
+      </div>
+    </form>
+  </section>
+</div>
+</body>
+</html>
