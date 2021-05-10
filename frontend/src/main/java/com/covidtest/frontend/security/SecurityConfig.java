@@ -50,7 +50,7 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .hasRole("government")
                 .antMatchers("/delivery/**")
                 .hasRole("delivery_man")
-                .antMatchers("/shop/**", "/account", "/css/**", "/img/**")
+                .antMatchers("/shop/**", "/account/**", "/css/**", "/img/**")
                 .hasRole("customer")
                 .anyRequest()
                 //.hasAnyRole("customer")

@@ -12,4 +12,9 @@ public class AuthService {
         KeycloakSecurityContext context = (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
         return "Bearer " + context.getTokenString();
     }
+
+    public String getUserId(HttpServletRequest request) {
+        KeycloakSecurityContext context = (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
+        return context.getToken().getSubject();
+    }
 }
