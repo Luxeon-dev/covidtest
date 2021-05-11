@@ -48,6 +48,8 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/v1/cart/**")
                 .hasRole("customer")
+                .antMatchers("/actuator/**")
+                .permitAll()
                 .anyRequest()
                 .denyAll();
     }

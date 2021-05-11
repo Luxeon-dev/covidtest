@@ -17,3 +17,12 @@ feign:
     config:
       default:
         errorDecoder: com.covidtest.frontend.feign.FeignExceptionDecoder
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
+  endpoint:
+    health:
+      show-details: always
