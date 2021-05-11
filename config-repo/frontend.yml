@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+keycloak:
+  auth-server-url: http://localhost:8081/auth
+  realm: covidtest
+  resource: frontend
+  public-client: true
+  principal-attribute: name
+
+eureka:
+  client:
+    register-with-eureka: false
+
+feign:
+  client:
+    config:
+      default:
+        errorDecoder: com.covidtest.frontend.feign.FeignExceptionDecoder

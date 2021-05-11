@@ -1,27 +1,3 @@
-server:
-  port: 8092
-
-keycloak:
-  auth-server-url: http://localhost:8081/auth
-  realm: covidtest
-  resource: order-ms
-  public-client: true
-  principal-attribute: preferred_username
-  bearer-only: true
-
 spring:
   application:
     name: order-ms
-  datasource:
-    url: jdbc:h2:mem:order-ms
-  jpa:
-    hibernate:
-      ddl-auto: update
-  h2:
-    console:
-      enabled: true
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka
