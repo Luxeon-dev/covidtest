@@ -6,32 +6,32 @@
 
 <div class="container">
     <section class="section">
-        <h1 class="title">Products</h1>
+        <h1 class="title">Produits</h1>
 
         <table class="table is-striped is-hoverable is-fullwidth">
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="product: ${products}">
-                <td th:text="${product.id}">ID</td>
-                <td th:text="${product.name}">Name</td>
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
                 <td>
                     <form th:action="@{/admin/products/delete/{id}(id = ${product.id})}" method="get">
-                        <a class="button is-small" th:href="@{/admin/products/{id}(id = ${product.id})}">Show</a>
-                        <a class="button is-info is-small" th:href="@{/admin/products/edit/{id}(id = ${product.id})}">Edit</a>
-                        <input class="button is-danger is-small" type="submit" value="Delete">
+                        <a class="button is-small" th:href="@{/admin/products/{id}(id = ${product.id})}">Afficher</a>
+                        <a class="button is-info is-small" th:href="@{/admin/products/edit/{id}(id = ${product.id})}">Modifier</a>
+                        <input class="button is-danger is-small" type="submit" value="Supprimer">
                     </form>
                 </td>
             </tr>
             </tbody>
         </table>
 
-        <a class="button is-primary" th:href="@{/admin/products/new}">New</a>
+        <a class="button is-primary" th:href="@{/admin/products/new}">Nouveau</a>
     </section>
 </div>
 </body>

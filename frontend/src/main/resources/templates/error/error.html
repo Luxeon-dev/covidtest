@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="fragments :: head (title='Error - CovidTest')"></head>
+<head th:replace="fragments :: head (title='Erreur - CovidTest')"></head>
 <body>
 <div th:replace="fragments :: navbar"></div>
 
 <div class="container">
     <section class="section">
         <div class="is-flex is-flex-direction-column is-align-items-center">
-            <h1 class="title"><span class="tag is-danger is-large" th:text="${code}">XXX</span> <span th:text="${status}">Status</span></h1>
-            <h2 class="subtitle" th:text="${message}">Error</h2>
+            <h1 class="title"><span class="tag is-danger is-large" th:text="${code}">XXX</span> <span th:text="${status}"></span></h1>
+            <h2 class="subtitle" th:text="${message}"></h2>
         </div>
     </section>
 </div>

@@ -6,25 +6,25 @@
 
 <div class="container">
   <section class="section">
-    <h1 class="title" th:text="${product.name}">Product Name</h1>
+    <h1 class="title" th:text="${product.name}"></h1>
 
     <table class="table is-striped is-hoverable is-fullwidth">
       <tbody>
         <tr>
           <th>ID</th>
-          <td th:text="${product.id}">ID</td>
+          <td th:text="${product.id}"></td>
         </tr>
         <tr>
-          <th>Name</th>
-          <td th:text="${product.name}">Name</td>
+          <th>Nom</th>
+          <td th:text="${product.name}"></td>
         </tr>
         <tr>
-          <th>Validity Duration</th>
-          <td th:text="${product.validityDuration}">Validity Duration</td>
+          <th>Durée de Validité</th>
+          <td><span th:text="${product.validityDuration}"></span> jours</td>
         </tr>
         <tr>
-          <th>Use Instructions</th>
-          <td th:text="${product.useInstructions}">Use Instructions</td>
+          <th>Instructions d'utilisation</th>
+          <td th:text="${product.useInstructions}"></td>
         </tr>
       </tbody>
     </table>

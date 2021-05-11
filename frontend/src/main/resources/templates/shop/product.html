@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="fragments :: head (title='Shop - CovidTest')"></head>
+<head th:replace="fragments :: head (title='Boutique - CovidTest')"></head>
 <body>
 <div th:replace="fragments :: navbar"></div>
 
 <div class="container">
   <section class="section">
-    <h1 class="title" th:text="${product.name}">Product Name</h1>
+    <h1 class="title" th:text="${product.name}"></h1>
 
     <div class="columns is-variable is-8">
       <div class="column is-6">
@@ -16,24 +16,24 @@
       </div>
       <div class="column is-6">
         <div class="content">
-          <h3>Validity</h3>
-          <p><span th:text="${product.validityDuration}"></span> days</p>
+          <h3>Durée de Validité</h3>
+          <p><span th:text="${product.validityDuration}"></span> jours</p>
 
-          <h3>Instructions</h3>
+          <h3>Instructions d'utilisation</h3>
           <p th:text="${product.useInstructions}"></p>
         </div>
 
         <form th:object="${shoppingCartEntry}" th:action="@{/shop/cart}" method="post">
           <div class="field">
             <input class="input" type="hidden" name="productId" id="productId" th:value="${product.id}">
-            <label class="label">Quantity</label>
+            <label class="label">Quantité</label>
             <div class="field has-addons">
               <div class="control">
                 <input class="input" type="number" value="1" min="1" name="quantity" id="quantity">
               </div>
 
               <div class="control">
-                <input class="button is-primary" type="submit" value="Add to cart">
+                <input class="button is-primary" type="submit" value="Ajouter au panier">
               </div>
             </div>
 

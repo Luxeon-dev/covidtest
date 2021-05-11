@@ -117,7 +117,7 @@ public class OrderController {
     }
 
     /**
-     * Set a order as delivered
+     * Set an order as delivered
      *
      * @param id Id of the order
      *

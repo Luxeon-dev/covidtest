@@ -17,23 +17,23 @@
     <div class="navbar-menu">
         <div class="navbar-end" sec:authorize="isAuthenticated()">
             <div class="navbar-item" th:if="${!isAdminPanel}">
-                <a class="has-text-primary" th:href="@{/shop/cart}">Cart</a>
+                <a class="has-text-primary" th:href="@{/shop/cart}">Panier</a>
             </div>
             <div class="navbar-item" sec:authorize="hasRole('admin')">
-                <a class="has-text-primary" th:href="@{/admin}">Admin Panel</a>
+                <a class="has-text-primary" th:href="@{/admin}">Administration</a>
             </div>
             <div class="navbar-item" sec:authorize="hasRole('government')">
-                <a class="has-text-primary" th:href="@{/government}">Government Panel</a>
+                <a class="has-text-primary" th:href="@{/government}">Gouvernement</a>
             </div>
             <div class="navbar-item" sec:authorize="hasRole('delivery_man')">
-                <a class="has-text-primary" th:href="@{/delivery}">Delivery Panel</a>
+                <a class="has-text-primary" th:href="@{/delivery}">Livraison</a>
             </div>
             <div class="navbar-item">
-                <a class="has-text-primary" th:href="@{/account}" sec:authentication="name"></a>
+                <a class="has-text-primary" th:href="@{/account}">Mon Compte</a>
             </div>
             <div class="navbar-item">
                 <form name="logoutForm" th:action="@{/logout}" method="post">
-                    <input class="button is-primary" type="submit" value="Sign Out" />
+                    <input class="button is-primary" type="submit" value="Déconnexion" />
                 </form>
             </div>
         </div>

@@ -10,12 +10,27 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service to convert classic ShopOrder (with only product id) to FullShopOrder (with full product infos)
+ * For display purpose only
+ */
 @Service
 public class FullShopOrderService {
 
+    /**
+     * Feign client of product microservice
+     */
     @Autowired
     private ProductMsFeignClient productMsFeignClient;
 
+    /**
+     * Convert a list of ShopOrders to a list of FullShopOrders to have access to Products details
+     *
+     * @param orders The list of ShopOrder
+     * @param token The user bearer token
+     *
+     * @return The list of FullShopOrder
+     */
     public List<FullShopOrder> completeOrdersWithFullProductData(Iterable<ShopOrder> orders, String token) {
         List<FullShopOrder> fullOrders = new ArrayList<>();
         for (ShopOrder order: orders) {

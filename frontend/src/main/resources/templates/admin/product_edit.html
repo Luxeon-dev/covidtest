@@ -6,25 +6,25 @@
 
 <div class="container">
   <section class="section">
-    <h1 class="title">Edit Product</h1>
+    <h1 class="title">Modifier un Produit</h1>
 
     <form th:object="${product}" th:action="@{/admin/products/edit/{id}(id = ${product.id})}" method="post">
       <div class="field">
-        <label class="label" for="productName">Name</label>
+        <label class="label" for="productName">Nom</label>
         <div class="control">
           <input class="input" type="text" id="productName" th:field="*{name}" />
         </div>
       </div>
 
       <div class="field">
-        <label class="label" for="productValidity">Validity</label>
+        <label class="label" for="productValidity">Durée de Validité (en jours)</label>
         <div class="control">
           <input class="input" type="text" id="productValidity" th:field="*{validityDuration}" />
         </div>
       </div>
 
       <div class="field">
-        <label class="label" for="productInstructions">Instructions</label>
+        <label class="label" for="productInstructions">Instructions d'utilisation</label>
         <div class="control">
           <input class="input" type="text" id="productInstructions" th:field="*{useInstructions}" />
         </div>
@@ -32,7 +32,7 @@
 
       <div class="field">
         <div class="control">
-          <input class="button is-primary" type="submit" value="Save">
+          <input class="button is-primary" type="submit" value="Enregistrer">
         </div>
       </div>
     </form>

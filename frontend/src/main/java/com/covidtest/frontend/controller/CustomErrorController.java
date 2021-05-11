@@ -8,9 +8,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Controller in charge to display error base on HTTP status code
+ */
 @Controller
 public class CustomErrorController implements ErrorController {
 
+    /**
+     * Display error based on HTTP code
+     *
+     * @param request The request
+     * @param model The model to pass data to the view
+     *
+     * @return The error view template
+     */
     @GetMapping("/error")
     public String error(HttpServletRequest request, Model model) {
         int code = Integer.parseInt(request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE).toString());
@@ -18,24 +29,24 @@ public class CustomErrorController implements ErrorController {
         String message;
         String status;
         if (code == 403) {
-            status = "Forbbiden";
-            message = "You are not allowed to reach this page.";
+            status = "Interdit";
+            message = "Vous n'êtes pas autorisé à accéder à cette page.";
         }
         else if (code == 404) {
-            status = "Page Not Found";
-            message = "The page you want to reach doesn't exist.";
+            status = "Ressource Non Trouvée";
+            message = "La page que vous essayez d'atteindre n'existe pas.";
         }
         else if (code == 503) {
-            status = "Service Unavailable";
-            message = "An error has occurred. Please contact an administrator.";
+            status = "Service Indisponible";
+            message = "Une erreur est survenue. S'il vous plait, contactez un administrateur.";
         }
         else if (code >= 500) {
-            status = "Server Error";
-            message = "An unexpected error has occurred. Please contact an administrator.";
+            status = "Erreur Serveur";
+            message = "Une erreur innatendue est survenue. S'il vous plait, contactez un administrateur.";
         }
         else {
-            status = "Error";
-            message = "An unexpected error has occurred. Please try again later.";
+            status = "Erreur";
+            message = "Une erreur innatendue est survenue. Réessayez plus tard.";
         }
 
         model.addAttribute("status", status);
