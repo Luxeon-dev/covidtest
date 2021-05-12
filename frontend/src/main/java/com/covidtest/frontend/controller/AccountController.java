@@ -1,7 +1,7 @@
 package com.covidtest.frontend.controller;
 
+import com.covidtest.frontend.feign.ApiGatewayFeignClient;
 import com.covidtest.frontend.feign.KeycloakFeignClient;
-import com.covidtest.frontend.feign.OrderMsFeignClient;
 import com.covidtest.frontend.model.*;
 import com.covidtest.frontend.service.AuthService;
 import com.covidtest.frontend.service.FullShopOrderService;
@@ -23,16 +23,16 @@ import java.util.stream.Collectors;
 public class AccountController {
 
     /**
-     * OpenFeign client for Order Microservice
-     */
-    @Autowired
-    private OrderMsFeignClient orderMsFeignClient;
-
-    /**
      * OpenFeign client for Keycloak API
      */
     @Autowired
     private KeycloakFeignClient keycloakFeignClient;
+
+    /**
+     * OpenFeign client for API Gateway
+     */
+    @Autowired
+    private ApiGatewayFeignClient apiGatewayFeignClient;
 
     /**
      * Service to convert standard order in full order with full product infos
@@ -58,7 +58,7 @@ public class AccountController {
     public String account(HttpServletRequest request, Model model) {
         String token = authService.getToken(request);
 
-        Iterable<ShopOrder> orders = orderMsFeignClient.getOrdersByUser(token);
+        Iterable<ShopOrder> orders = apiGatewayFeignClient.getOrdersByUser(token);
 
         List<FullShopOrder> fullOrders = fullShopOrderService.completeOrdersWithFullProductData(orders, token);
 

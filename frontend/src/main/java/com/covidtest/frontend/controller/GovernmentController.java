@@ -1,6 +1,6 @@
 package com.covidtest.frontend.controller;
 
-import com.covidtest.frontend.feign.OrderMsFeignClient;
+import com.covidtest.frontend.feign.ApiGatewayFeignClient;
 import com.covidtest.frontend.model.FullShopOrder;
 import com.covidtest.frontend.model.ShopOrder;
 import com.covidtest.frontend.service.AuthService;
@@ -20,10 +20,10 @@ import java.util.List;
 public class GovernmentController {
 
     /**
-     * OpenFeign client for the order microservice
+     * OpenFeign client for the API Gateway
      */
     @Autowired
-    private OrderMsFeignClient orderMsFeignClient;
+    private ApiGatewayFeignClient apiGatewayFeignClient;
 
     /**
      * Service to convert standard order in full order with full product infos
@@ -49,7 +49,7 @@ public class GovernmentController {
     public String getAllOrders(HttpServletRequest request, Model model) {
         String token = authService.getToken(request);
 
-        Iterable<ShopOrder> orders = orderMsFeignClient.getAllOrders(token);
+        Iterable<ShopOrder> orders = apiGatewayFeignClient.getAllOrders(token);
 
         List<FullShopOrder> fullOrders = fullShopOrderService.completeOrdersWithFullProductData(orders, token);
 

@@ -1,6 +1,6 @@
 package com.covidtest.frontend.controller;
 
-import com.covidtest.frontend.feign.OrderMsFeignClient;
+import com.covidtest.frontend.feign.ApiGatewayFeignClient;
 import com.covidtest.frontend.model.FullShopOrder;
 import com.covidtest.frontend.model.ShopOrder;
 import com.covidtest.frontend.service.AuthService;
@@ -23,10 +23,10 @@ import java.util.List;
 public class DeliveryController {
 
     /**
-     * OpenFeign client for the order microservice
+     * OpenFeign client for the API Gateway
      */
     @Autowired
-    private OrderMsFeignClient orderMsFeignClient;
+    private ApiGatewayFeignClient apiGatewayFeignClient;
 
     /**
      * AuthService for the token
@@ -52,10 +52,10 @@ public class DeliveryController {
     public String home(HttpServletRequest request, Model model) {
         String token = authService.getToken(request);
 
-        Iterable<ShopOrder> unassignedOrders = orderMsFeignClient.getUnassignedOrders(token);
+        Iterable<ShopOrder> unassignedOrders = apiGatewayFeignClient.getUnassignedOrders(token);
         List<FullShopOrder> unassignedFullOrders = fullShopOrderService.completeOrdersWithFullProductData(unassignedOrders, token);
 
-        Iterable<ShopOrder> assignedOrders = orderMsFeignClient.getOrdersToDeliver(token);
+        Iterable<ShopOrder> assignedOrders = apiGatewayFeignClient.getOrdersToDeliver(token);
         List<FullShopOrder> assignedFullOrders = fullShopOrderService.completeOrdersWithFullProductData(assignedOrders, token);
 
         model.addAttribute("unassignedOrders", unassignedFullOrders);
@@ -76,7 +76,7 @@ public class DeliveryController {
     public RedirectView assign(HttpServletRequest request, @PathVariable Long id) {
         String token = authService.getToken(request);
 
-        ShopOrder order = orderMsFeignClient.assign(token, id);
+        ShopOrder order = apiGatewayFeignClient.assign(token, id);
 
         return new RedirectView("/delivery");
     }
@@ -93,7 +93,7 @@ public class DeliveryController {
     public RedirectView markAsDelivered(HttpServletRequest request, @PathVariable Long id) {
         String token = authService.getToken(request);
 
-        ShopOrder order = orderMsFeignClient.markAsDelivered(token, id);
+        ShopOrder order = apiGatewayFeignClient.markAsDelivered(token, id);
 
         return new RedirectView("/delivery");
     }

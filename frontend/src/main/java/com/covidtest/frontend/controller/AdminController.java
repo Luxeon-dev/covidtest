@@ -1,7 +1,7 @@
 package com.covidtest.frontend.controller;
 
+import com.covidtest.frontend.feign.ApiGatewayFeignClient;
 import com.covidtest.frontend.feign.KeycloakFeignClient;
-import com.covidtest.frontend.feign.ProductMsFeignClient;
 import com.covidtest.frontend.model.KeycloakUser;
 import com.covidtest.frontend.model.KeycloakUserRole;
 import com.covidtest.frontend.model.Product;
@@ -24,16 +24,16 @@ import java.util.stream.Collectors;
 public class AdminController {
 
     /**
-     * OpenFeign client for the product microservice
-     */
-    @Autowired
-    private ProductMsFeignClient productMsFeignClient;
-
-    /**
      * OpenFeign client for the Keycloak API
      */
     @Autowired
     private KeycloakFeignClient keycloakFeignClient;
+
+    /**
+     * OpenFeign client for the API Gateway
+     */
+    @Autowired
+    private ApiGatewayFeignClient apiGatewayFeignClient;
 
     /**
      * AuthService for the token
@@ -65,7 +65,7 @@ public class AdminController {
     public String products(HttpServletRequest request, Model model) {
         String token = authService.getToken(request);
 
-        List<Product> products = productMsFeignClient.getAllProducts(token);
+        List<Product> products = apiGatewayFeignClient.getAllProducts(token);
 
         model.addAttribute("products", products);
 
@@ -85,7 +85,7 @@ public class AdminController {
     public String showProduct(HttpServletRequest request, Model model, @PathVariable Long id) {
         String token = authService.getToken(request);
 
-        Product product = productMsFeignClient.getProductById(token, id);
+        Product product = apiGatewayFeignClient.getProductById(token, id);
 
         model.addAttribute("product", product);
 
@@ -120,7 +120,7 @@ public class AdminController {
     public RedirectView addProductPost(HttpServletRequest request, Product product) {
         String token = authService.getToken(request);
 
-        product = productMsFeignClient.postProduct(token, product);
+        product = apiGatewayFeignClient.postProduct(token, product);
 
         return new RedirectView("/admin/products");
     }
@@ -138,7 +138,7 @@ public class AdminController {
     public String editProductGet(HttpServletRequest request, Model model, @PathVariable Long id) {
         String token = authService.getToken(request);
 
-        Product product = productMsFeignClient.getProductById(token, id);
+        Product product = apiGatewayFeignClient.getProductById(token, id);
 
         model.addAttribute("product", product);
 
@@ -158,7 +158,7 @@ public class AdminController {
     public RedirectView editProductPost(HttpServletRequest request, Product product, @PathVariable Long id) {
         String token = authService.getToken(request);
 
-        product = productMsFeignClient.putProduct(token, product, id);
+        product = apiGatewayFeignClient.putProduct(token, product, id);
 
         return new RedirectView("/admin/products");
     }
@@ -175,7 +175,7 @@ public class AdminController {
     public RedirectView deleteProduct(HttpServletRequest request, @PathVariable Long id) {
         String token = authService.getToken(request);
 
-        productMsFeignClient.deleteProduct(token, id);
+        apiGatewayFeignClient.deleteProduct(token, id);
 
         return new RedirectView("/admin/products");
     }

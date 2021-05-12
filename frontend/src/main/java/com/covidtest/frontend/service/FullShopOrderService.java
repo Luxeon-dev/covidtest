@@ -1,6 +1,6 @@
 package com.covidtest.frontend.service;
 
-import com.covidtest.frontend.feign.ProductMsFeignClient;
+import com.covidtest.frontend.feign.ApiGatewayFeignClient;
 import com.covidtest.frontend.model.FullShopOrder;
 import com.covidtest.frontend.model.Product;
 import com.covidtest.frontend.model.ShopOrder;
@@ -18,10 +18,10 @@ import java.util.List;
 public class FullShopOrderService {
 
     /**
-     * Feign client of product microservice
+     * Feign client of API Gateway
      */
     @Autowired
-    private ProductMsFeignClient productMsFeignClient;
+    private ApiGatewayFeignClient apiGatewayFeignClient;
 
     /**
      * Convert a list of ShopOrders to a list of FullShopOrders to have access to Products details
@@ -41,7 +41,7 @@ public class FullShopOrderService {
                 Long productId = order.getOrderEntries().get(i).getProductId();
                 Product product;
                 try {
-                    product = productMsFeignClient.getProductById(token, productId);
+                    product = apiGatewayFeignClient.getProductById(token, productId);
                 }
                 catch (Exception e) {
                     product = new Product();

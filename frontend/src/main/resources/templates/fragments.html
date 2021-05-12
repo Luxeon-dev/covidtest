@@ -7,7 +7,7 @@
     <link rel="icon" th:href="@{/img/favicon.ico}" />
 </head>
 <body>
-<nav th:fragment="navbar" th:with="isAdminPanel=(${isAdminPanel} ?: false)" class="navbar is-light" role="navigation" aria-label="main navigation">
+<nav th:fragment="navbar" th:with="isAdminPanel=(${isAdminPanel} ?: false)" class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" th:href="@{/shop}">
             <img th:src="@{/img/covidtest_logo.png}" alt="CovidTest Logo" width="112" height="28">

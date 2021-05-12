@@ -1,8 +1,6 @@
 package com.covidtest.frontend.controller;
 
-import com.covidtest.frontend.feign.OrderMsFeignClient;
-import com.covidtest.frontend.feign.ProductMsFeignClient;
-import com.covidtest.frontend.feign.ShoppingCartMsFeignClient;
+import com.covidtest.frontend.feign.ApiGatewayFeignClient;
 import com.covidtest.frontend.model.ShopOrder;
 import com.covidtest.frontend.model.Product;
 import com.covidtest.frontend.model.ShoppingCart;
@@ -26,22 +24,10 @@ import java.util.*;
 public class ShopController {
 
     /**
-     * OpenFeign client for the product microservice
+     * OpenFeign client for the API Gateway
      */
     @Autowired
-    private ProductMsFeignClient productMsFeignClient;
-
-    /**
-     * OpenFeign client for the shopping cart microservice
-     */
-    @Autowired
-    private ShoppingCartMsFeignClient shoppingCartMsFeignClient;
-
-    /**
-     * OpenFeign client for the order microservice
-     */
-    @Autowired
-    private OrderMsFeignClient orderMsFeignClient;
+    private ApiGatewayFeignClient apiGatewayFeignClient;
 
     /**
      * AuthService for the token
@@ -71,7 +57,7 @@ public class ShopController {
     public String shop(HttpServletRequest request, Model model) {
         String token = authService.getToken(request);
 
-        List<Product> products = productMsFeignClient.getAllProducts(token);
+        List<Product> products = apiGatewayFeignClient.getAllProducts(token);
 
         model.addAttribute("products", products);
 
@@ -92,7 +78,7 @@ public class ShopController {
     public String productDetails(HttpServletRequest request, @PathVariable Long id, Model model, ShoppingCartEntry shoppingCartEntry) {
         String token = authService.getToken(request);
 
-        Product product = productMsFeignClient.getProductById(token, id);
+        Product product = apiGatewayFeignClient.getProductById(token, id);
 
         model.addAttribute("product", product);
         model.addAttribute("shoppingCartEntry", shoppingCartEntry);
@@ -113,14 +99,14 @@ public class ShopController {
     public String getShoppingCart(HttpServletRequest request, Model model, ShopOrder order) {
         String token = authService.getToken(request);
 
-        Optional<ShoppingCart> optionalCart = shoppingCartMsFeignClient.getShoppingCart(token);
+        Optional<ShoppingCart> optionalCart = apiGatewayFeignClient.getShoppingCart(token);
 
         List<Map<String, Object>> cartEntries = new ArrayList<>();
 
         if (optionalCart.isPresent()) {
             for (ShoppingCartEntry entry: optionalCart.get().getEntries()) {
 
-                Product product = productMsFeignClient.getProductById(token, entry.getProductId());
+                Product product = apiGatewayFeignClient.getProductById(token, entry.getProductId());
 
                 Map<String, Object> cartEntry = new HashMap<>();
                 cartEntry.put("product", product);
@@ -148,7 +134,7 @@ public class ShopController {
     public RedirectView addProductToCart(HttpServletRequest request, ShoppingCartEntry entry) {
         String token = authService.getToken(request);
 
-        shoppingCartMsFeignClient.addProductToCart(token, entry);
+        apiGatewayFeignClient.addProductToCart(token, entry);
 
         return new RedirectView("/shop/cart");
     }
@@ -165,10 +151,10 @@ public class ShopController {
     public RedirectView order(HttpServletRequest request, ShopOrder order) {
         String token = authService.getToken(request);
 
-        order = orderMsFeignClient.postOrder(token, order);
+        order = apiGatewayFeignClient.postOrder(token, order);
 
         if (order.getId() != null) {
-            shoppingCartMsFeignClient.deleteShoppingCart(token);
+            apiGatewayFeignClient.deleteShoppingCart(token);
         }
 
         return new RedirectView("/account");

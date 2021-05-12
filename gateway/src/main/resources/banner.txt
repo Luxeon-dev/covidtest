@@ -1,0 +1,36 @@
+${AnsiColor.CYAN}                               %%%%%%%                                     
+${AnsiColor.CYAN}                           %%%%%%%%                                     
+${AnsiColor.CYAN}                         %%%%% %%%%%                                            
+${AnsiColor.CYAN}                                 %%%%                                           
+${AnsiColor.CYAN}                                  %%%%%        %%%%%%%%%                        
+${AnsiColor.CYAN}                                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%                
+${AnsiColor.CYAN}                                   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%            
+${AnsiColor.CYAN}             %%%%               %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%         
+${AnsiColor.CYAN}            %%%%              %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%          
+${AnsiColor.CYAN}           %%%%%%%          %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%             
+${AnsiColor.CYAN}          %%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%               %%%%%%               
+${AnsiColor.CYAN}          %%%       %%%%%%%%%%%%%%%%%%%%%                                       
+${AnsiColor.CYAN}                        %%%%%%%%%%%%%%%                                         
+${AnsiColor.CYAN}                        %%%%%%%%%%%%%                                           
+${AnsiColor.CYAN}                       %%%%%%%%%%%%%#                                           
+${AnsiColor.CYAN}                       %%%%%%%%%%%%%                                            
+${AnsiColor.CYAN}                       %%%%%%%%%%%%%                                            
+${AnsiColor.CYAN}                       %%%%%%%%%%%%%%                                           
+${AnsiColor.CYAN}         %%%            %%%%%%%%%%%%%%                                          
+${AnsiColor.CYAN}         %%%%%  %%%%%%%%%%%%%%%%%%%%%%%%                                        
+${AnsiColor.CYAN}          %%%%%%%%%%%%    %%%%%%%%%%%%%%%%                   %%                 
+${AnsiColor.CYAN}           %%%%            %%%%%%%%%%%%%%%%%%%           %%%%%%%%%              
+${AnsiColor.CYAN}            %%%%             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%            
+${AnsiColor.CYAN}              %%               %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%         
+${AnsiColor.CYAN}                                 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%          
+${AnsiColor.CYAN}                                  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#             
+${AnsiColor.CYAN}                                %%%%%     %%%%%%%%%%%%%%%%%%%                   
+${AnsiColor.CYAN}                               %%%%%                                            
+${AnsiColor.CYAN}                       %%%%%%%%%%%                                              
+${AnsiColor.CYAN}                          %%%%%%%                                               
+${AnsiColor.CYAN}                             %%%%%%%
+
+${AnsiColor.BLUE}                                          CovidTest
+${AnsiColor.BLUE}                                      :: Spring Boot ::           (${spring-boot.version})
+
+
