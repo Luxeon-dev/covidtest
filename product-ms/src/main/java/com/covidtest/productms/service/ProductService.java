@@ -78,6 +78,8 @@ public class ProductService {
      * @param id The id of the product to delete
      */
     public void deleteProduct(Long id) {
+        productRepository.findById(id).orElseThrow(EntityNotFoundException::new); // Find before delete just to throw 404 in case of invalid id
+
         productRepository.deleteById(id);
     }
 }

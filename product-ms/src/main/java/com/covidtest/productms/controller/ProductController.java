@@ -50,7 +50,7 @@ public class ProductController {
     /**
      * Get an specific product by its id
      *
-     * @param id The id of the product to retreive
+     * @param id The id of the product to retrieve
      *
      * @return The book corresponding to the id
      */
