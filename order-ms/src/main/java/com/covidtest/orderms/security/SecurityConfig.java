@@ -47,7 +47,7 @@ class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .hasRole("government")
                 .antMatchers("/api/v1/orders/unassigned", "/api/v1/orders/assigned", "/api/v1/orders/*/assign", "/api/v1/orders/*/delivered")
                 .hasRole("delivery_man")
-                .antMatchers("/api/v1/orders")
+                .antMatchers("/api/v1/orders", "/api/v1/orders/")
                 .hasRole("customer")
                 .antMatchers("/actuator/**")
                 .permitAll()

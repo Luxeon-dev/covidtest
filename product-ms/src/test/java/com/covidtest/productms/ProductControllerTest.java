@@ -1,8 +1,8 @@
 package com.covidtest.productms;
 
+import com.covidtest.productms.dto.UnidentifiedProductDto;
 import com.covidtest.productms.model.Product;
 import com.covidtest.productms.repository.ProductRepository;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.security.Principal;
 import java.util.Set;
@@ -64,7 +63,6 @@ class ProductControllerTest {
      */
     public ProductControllerTest() {
         this.mapper = new ObjectMapper();
-        this.mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
     /**
@@ -170,7 +168,7 @@ class ProductControllerTest {
     void givenProductAndValidUser_whenPostProduct_thenOk() throws Exception {
         configureSecurityContext("test", "admin");
 
-        Product product = new Product();
+        UnidentifiedProductDto product = new UnidentifiedProductDto();
         product.setName("Antigenic");
         product.setValidityDuration(10);
         product.setUseInstructions("Antigenic Instructions");
@@ -194,7 +192,7 @@ class ProductControllerTest {
     void givenProductAndInvalidUser_whenPostProduct_thenForbidden() throws Exception {
         configureSecurityContext("test", "customer", "delivery_man", "government");
 
-        Product product = new Product();
+        UnidentifiedProductDto product = new UnidentifiedProductDto();
         product.setName("Antigenic");
         product.setValidityDuration(10);
         product.setUseInstructions("Antigenic Instructions");
@@ -217,21 +215,21 @@ class ProductControllerTest {
     void givenValidProductAndValidUser_whenPutProduct_thenOk() throws Exception {
         configureSecurityContext("test", "admin");
 
-        Product product = new Product();
+        UnidentifiedProductDto product = new UnidentifiedProductDto();
         product.setName("Antigenic");
         product.setValidityDuration(10);
         product.setUseInstructions("Antigenic Instructions");
 
         String requestBody =  mapper.writeValueAsString(product);
 
-        product.setId(productId);
-        String expectedResponseBody =  mapper.writeValueAsString(product);
-
         mockMvc.perform(MockMvcRequestBuilders
                 .put(baseUrl + productId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody))
-                .andExpect(content().json(expectedResponseBody))
+                .andExpect(jsonPath("$.id").value(productId))
+                .andExpect(jsonPath("$.name").value(product.getName()))
+                .andExpect(jsonPath("$.validityDuration").value(product.getValidityDuration()))
+                .andExpect(jsonPath("$.useInstructions").value(product.getUseInstructions()))
                 .andExpect(status().isOk());
     }
 
@@ -244,7 +242,7 @@ class ProductControllerTest {
     void givenInvalidProductAndValidUser_whenPutProduct_thenNotFound() throws Exception {
         configureSecurityContext("test", "admin");
 
-        Product product = new Product();
+        UnidentifiedProductDto product = new UnidentifiedProductDto();
         product.setName("Antigenic");
         product.setValidityDuration(10);
         product.setUseInstructions("Antigenic Instructions");
@@ -267,7 +265,7 @@ class ProductControllerTest {
     void givenValidProductAndInvalidUser_whenPutProduct_thenForbidden() throws Exception {
         configureSecurityContext("test", "customer", "delivery_man", "government");
 
-        Product product = new Product();
+        UnidentifiedProductDto product = new UnidentifiedProductDto();
         product.setName("Antigenic");
         product.setValidityDuration(10);
         product.setUseInstructions("Antigenic Instructions");
