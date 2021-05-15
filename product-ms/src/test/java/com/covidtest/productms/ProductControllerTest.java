@@ -25,8 +25,7 @@ import java.util.Set;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Tests for ProductController
@@ -55,8 +54,14 @@ class ProductControllerTest {
      */
     private Long productId;
 
+    /**
+     * Mapper to convert object into JSON
+     */
     private ObjectMapper mapper;
 
+    /**
+     * Constructor
+     */
     public ProductControllerTest() {
         this.mapper = new ObjectMapper();
         this.mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
@@ -176,7 +181,7 @@ class ProductControllerTest {
                 .post(baseUrl)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.id").exists())
                 .andExpect(status().isOk());
     }
 
